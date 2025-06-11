@@ -1,0 +1,202 @@
+{
+  "editor.cursorBlinking": "phase",
+  "workbench.colorTheme": "Catppuccin Frappé",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorSurroundingLinesStyle": "all",
+  "editor.smoothScrolling": true,
+  "workbench.list.smoothScrolling": true,
+  "terminal.integrated.smoothScrolling": true,
+  "mdx.experimentalLanguageServer": true,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "godotTools.editorPath.godot4": "/usr/bin/godot",
+  "background.fullscreen": {
+    "images": [
+      "https://cdn.wallpapersafari.com/71/14/Hr7ZQj.jpg",
+      "https://wallpapercave.com/wp/wp6952566.jpg",
+      "https://w.wallhaven.cc/full/7p/wallhaven-7p3z53.png",
+      "https://wallpapercave.com/wp/wp6051017.jpg",
+      "https://github.com/Gingeh/wallpapers/blob/main/landscapes/evening-sky.png?raw=true"
+    ], // urls of your images
+    "opacity": 0.92, // 0.85 ~ 0.95 recommended
+    "size": "cover", // also css, `cover` to self-adaption (recommended)，or `contain`、`200px 200px`
+    "useFront": false,
+    "position": "center", // alias to `background-position`, default `center`
+    "interval": 600 // seconds of interval for carousel, default `0` to disabled.
+  },
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.value": 8,
+  "workbench.editor.pinnedTabSizing": "shrink",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
+  "eslint.workingDirectories": [
+    { "pattern": "apps/*/" },
+    { "pattern": "packages/*/" },
+    { "pattern": "tooling/*/" }
+  ],
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "typescript.preferences.autoImportFileExcludePatterns": [
+    "next/router.d.ts",
+    "next/dist/client/router.d.ts"
+  ],
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "tailwindCSS.experimental.configFile": "./front-end/tailwind.config.ts",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.linkedEditing": true,
+  "editor.mouseWheelZoom": true,
+  "terminal.integrated.fontFamily": "Cascadia Code NF",
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.fontWeight": "normal",
+  "terminal.integrated.fontWeightBold": "bold",
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorWidth": 1,
+
+  "editor.fontFamily": "Cascadia Code", // =>
+  "editor.accessibilitySupport": "off",
+  "editor.detectIndentation": false,
+  "editor.fontLigatures": "'calt', 'ss01'",
+  "[python]": {
+    "editor.insertSpaces": true,
+
+    "editor.tabSize": 4
+  },
+  "cSpell.words": ["elysia", "jiti"],
+  "python.analysis.typeCheckingMode": "basic",
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "tailwindCSS.includeLanguages": {
+    "html": "html",
+    "typescriptreact": "typescriptreact",
+    "javascriptreact": "javascriptreact",
+    "typescript": "typescript",
+    "css": "css",
+    "javascript": "javascript"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "workbench.editor.customLabels.patterns": {
+    "apps/**/src/**/page.tsx": "${dirname}/📄",
+    "apps/**/src/**/layout.tsx": "${dirname}/${filename}",
+    "apps/**/src/routes/**/index.ts": "${dirname}/${filename}",
+    "apps/server/src/routes/**/handlers.ts": "${dirname}/${filename}",
+    "apps/client/src/help/**/page.mdx": "${dirname}/${filename}"
+  },
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "editor.insertSpaces": true,
+  "vim.useSystemClipboard": true,
+
+  "vim.useCtrlKeys": false,
+  "window.titleBarStyle": "native",
+  "apc.electron": {
+    "frame": false,
+    "titleBarStyle": "hidden"
+  },
+  "apc.header": {
+    "height": 40
+  },
+  "apc.font.family": "Cascadia Code",
+  // "apc.stylesheet": {
+  //   ".decorationsOverviewRuler": "display: none;",
+  //   ".editor-group-container .title *": "display: none;",
+  //   ".editor-group-container .title": "pointer-events: none;",
+  //   ".editor-group-container.empty": "-webkit-app-region: drag;",
+  //   ".monaco-editor .scroll-decoration": "box-shadow: none;"
+  // },
+  "debug.console.fontFamily": "Cascadia Mono",
+  "debug.console.fontSize": 15,
+  // "debug.console.lineHeight": 35,
+  "debug.toolBarLocation": "docked",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.renderSideBySide": false,
+  "editor.bracketPairColorization.enabled": false,
+  "editor.colorDecorators": false,
+  "editor.cursorStyle": "line-thin",
+  "editor.fontSize": 17,
+  "editor.glyphMargin": false,
+  "editor.gotoLocation.multipleDeclarations": "goto",
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "editor.gotoLocation.multipleImplementations": "goto",
+  "editor.gotoLocation.multipleReferences": "goto",
+  "editor.gotoLocation.multipleTypeDefinitions": "goto",
+  "editor.guides.indentation": false,
+  "editor.hideCursorInOverviewRuler": true,
+  // "editor.lineHeight": 30,
+  "editor.lineNumbers": "relative",
+
+  "editor.matchBrackets": "near",
+  "editor.minimap.enabled": false,
+  "editor.occurrencesHighlight": "off",
+  "editor.renderLineHighlight": "none",
+  "editor.renderWhitespace": "none",
+  "editor.scrollbar.horizontalScrollbarSize": 8,
+  "editor.scrollbar.verticalScrollbarSize": 8,
+  "explorer.compactFolders": false,
+  "explorer.decorations.badges": false,
+  // "explorer.openEditors.visible": 1,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "markdown.preview.markEditorSelection": false,
+  "problems.decorations.enabled": false,
+  "scm.diffDecorations": "none",
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  // "terminal.integrated.lineHeight": 1.85,
+  "window.autoDetectColorScheme": true,
+
+  "window.title": "‎",
+
+  "workbench.editor.revealIfOpen": true,
+  "workbench.iconTheme": "symbols",
+  "workbench.list.horizontalScrolling": true,
+
+  "workbench.startupEditor": "none",
+  "workbench.tips.enabled": false,
+  "workbench.tree.indent": 16,
+  "workbench.tree.renderIndentGuides": "none",
+
+  "symbols.hidesExplorerArrows": false,
+  "workbench.activityBar.location": "bottom",
+  "window.commandCenter": false,
+  "workbench.layoutControl.enabled": false,
+  "editor.stickyScroll.enabled": false,
+
+  "security.workspace.trust.untrustedFiles": "open",
+
+  "workbench.productIconTheme": "Tabler",
+  "editor.unicodeHighlight.nonBasicASCII": false,
+  "editor.formatOnPaste": true,
+  "editor.quickSuggestionsDelay": 10,
+  "emmet.showSuggestionsAsSnippets": true,
+  "workbench.editor.editorActionsLocation": "hidden",
+  "workbench.statusBar.visible": false,
+  "workbench.editor.showTabs": "multiple",
+
+  "workbench.sideBar.location": "left",
+  "supermaven.enable": {
+    "*": true
+  },
+  "[gdscript]": {
+    "editor.defaultFormatter": "poeticAndroid.pretty-gd-vs"
+  }
+
+  // extension settings
+}
