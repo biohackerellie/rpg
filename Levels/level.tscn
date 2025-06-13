@@ -1,6 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://e8aomu1xacpu"]
+[gd_scene load_steps=10 format=3 uid="uid://e8aomu1xacpu"]
 
 [ext_resource type="PackedScene" uid="uid://gk4jx07qcufb" path="res://Player/player.tscn" id="1_s41d2"]
+[ext_resource type="PackedScene" uid="uid://d30uvfstg0hki" path="res://Assets/3D_Assets/Environment/Rock_Cliff_Env_03.glb" id="2_gtnvv"]
+[ext_resource type="PackedScene" uid="uid://cggw4v70reri7" path="res://Assets/3D_Assets/Environment/Tree_Group_Vege.glb" id="3_uhyyw"]
+[ext_resource type="PackedScene" uid="uid://nuw5ndsl4dkb" path="res://Assets/3D_Assets/Environment/Topiary_Tree_Vege_01.glb" id="4_t80w2"]
+[ext_resource type="PackedScene" uid="uid://dry24ojqv3bai" path="res://Assets/3D_Assets/Environment/Bush_Vege_2.glb" id="5_8a2b0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5xgho"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -15,6 +19,9 @@ sky = SubResource("Sky_u52ul")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gtnvv"]
+albedo_color = Color(0.321569, 0.317647, 0.117647, 1)
+
 [node name="Level" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -28,6 +35,114 @@ environment = SubResource("Environment_vonw3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 use_collision = true
 size = Vector3(50, 1, 50)
+material = SubResource("StandardMaterial3D_gtnvv")
 
 [node name="Player" parent="." instance=ExtResource("1_s41d2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MapBoundary" type="Node3D" parent="."]
+
+[node name="RockWall" parent="MapBoundary" instance=ExtResource("2_gtnvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2, -23)
+
+[node name="Rock_Cliff_Env_032" parent="MapBoundary/RockWall" instance=ExtResource("2_gtnvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 0)
+
+[node name="Rock_Cliff_Env_034" parent="MapBoundary/RockWall/Rock_Cliff_Env_032" instance=ExtResource("2_gtnvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, 0)
+
+[node name="RockWall2" parent="MapBoundary" instance=ExtResource("2_gtnvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2, 27)
+
+[node name="Rock_Cliff_Env_032" parent="MapBoundary/RockWall2" instance=ExtResource("2_gtnvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 0)
+
+[node name="Rock_Cliff_Env_034" parent="MapBoundary/RockWall2/Rock_Cliff_Env_032" instance=ExtResource("2_gtnvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, 0)
+
+[node name="RockWall3" parent="MapBoundary" instance=ExtResource("2_gtnvv")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -26, 2, 16)
+
+[node name="Rock_Cliff_Env_032" parent="MapBoundary/RockWall3" instance=ExtResource("2_gtnvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 0)
+
+[node name="Rock_Cliff_Env_034" parent="MapBoundary/RockWall3/Rock_Cliff_Env_032" instance=ExtResource("2_gtnvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, 0)
+
+[node name="RockWall4" parent="MapBoundary" instance=ExtResource("2_gtnvv")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 24, 2, 16)
+
+[node name="Rock_Cliff_Env_032" parent="MapBoundary/RockWall4" instance=ExtResource("2_gtnvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 0)
+
+[node name="Rock_Cliff_Env_034" parent="MapBoundary/RockWall4/Rock_Cliff_Env_032" instance=ExtResource("2_gtnvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, 0)
+
+[node name="Vegetation" type="Node3D" parent="."]
+
+[node name="Trees" type="Node3D" parent="Vegetation"]
+
+[node name="Tree_Group_Vege2" parent="Vegetation/Trees" instance=ExtResource("3_uhyyw")]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 13, -1, -8)
+
+[node name="Topiary_Tree_Vege_012" parent="Vegetation/Trees" instance=ExtResource("4_t80w2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -15)
+
+[node name="Topiary_Tree_Vege_014" parent="Vegetation/Trees" instance=ExtResource("4_t80w2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -15)
+
+[node name="Topiary_Tree_Vege_013" parent="Vegetation/Trees" instance=ExtResource("4_t80w2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
+
+[node name="Topiary_Tree_Vege_015" parent="Vegetation/Trees" instance=ExtResource("4_t80w2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="Bushes" type="Node3D" parent="Vegetation"]
+
+[node name="Bush_Vege_22" parent="Vegetation/Bushes" instance=ExtResource("5_8a2b0")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 0, -18)
+
+[node name="Bush_Vege_23" parent="Vegetation/Bushes" instance=ExtResource("5_8a2b0")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -18, 0, -18)
+
+[node name="Bush_Vege_29" parent="Vegetation/Bushes" instance=ExtResource("5_8a2b0")]
+transform = Transform3D(2.98023e-08, 0, -1, 0, 1, 0, 1, 0, 2.98023e-08, -19, 0, -7)
+
+[node name="Bush_Vege_24" parent="Vegetation/Bushes" instance=ExtResource("5_8a2b0")]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 20, 0, -18)
+
+[node name="Bush_Vege_25" parent="Vegetation/Bushes" instance=ExtResource("5_8a2b0")]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 11, 0, -11)
+
+[node name="Bush_Vege_28" parent="Vegetation/Bushes" instance=ExtResource("5_8a2b0")]
+transform = Transform3D(-1.19209e-07, 0, 1, 0, 1, 0, -1, 0, -1.19209e-07, -6, 0, 9)
+
+[node name="Bush_Vege_37" parent="Vegetation/Bushes" instance=ExtResource("5_8a2b0")]
+transform = Transform3D(-1.19209e-07, 0, 1, 0, 1, 0, -1, 0, -1.19209e-07, -11, 0, 9)
+
+[node name="Bush_Vege_34" parent="Vegetation/Bushes" instance=ExtResource("5_8a2b0")]
+transform = Transform3D(-1, 0, -1.62921e-07, 0, 1, 0, 1.62921e-07, 0, -1, -8, 0, 11)
+
+[node name="Bush_Vege_35" parent="Vegetation/Bushes" instance=ExtResource("5_8a2b0")]
+transform = Transform3D(-1, 0, -1.62921e-07, 0, 1, 0, 1.62921e-07, 0, -1, -8, 0, 9)
+
+[node name="Bush_Vege_36" parent="Vegetation/Bushes" instance=ExtResource("5_8a2b0")]
+transform = Transform3D(-1, 0, -1.62921e-07, 0, 1, 0, 1.62921e-07, 0, -1, -8, 0, 7)
+
+[node name="Bush_Vege_26" parent="Vegetation/Bushes" instance=ExtResource("5_8a2b0")]
+transform = Transform3D(-1, 0, -4.37114e-08, 0, 1, 0, 4.37114e-08, 0, -1, -16, 0, 20)
+
+[node name="Bush_Vege_30" parent="Vegetation/Bushes" instance=ExtResource("5_8a2b0")]
+transform = Transform3D(-1, 0, -4.37114e-08, 0, 1, 0, 4.37114e-08, 0, -1, -8, 0, 20)
+
+[node name="Bush_Vege_31" parent="Vegetation/Bushes" instance=ExtResource("5_8a2b0")]
+transform = Transform3D(-1, 0, -4.37114e-08, 0, 1, 0, 4.37114e-08, 0, -1, 1, 0, 20)
+
+[node name="Bush_Vege_32" parent="Vegetation/Bushes" instance=ExtResource("5_8a2b0")]
+transform = Transform3D(-1, 0, -4.37114e-08, 0, 1, 0, 4.37114e-08, 0, -1, 11, 0, 20)
+
+[node name="Bush_Vege_33" parent="Vegetation/Bushes" instance=ExtResource("5_8a2b0")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 20, 0, 20)
+
+[node name="Bush_Vege_27" parent="Vegetation/Bushes" instance=ExtResource("5_8a2b0")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -19, 0, 19)
