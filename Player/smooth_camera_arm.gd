@@ -1,7 +1,7 @@
 extends SpringArm3D
 
 @export var target: Node3D
-@export var decay: float = 20.0
+@export var decay: float = 25.0
 
 
 func _physics_process(delta) -> void:

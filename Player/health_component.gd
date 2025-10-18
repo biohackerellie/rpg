@@ -1,0 +1,33 @@
+extends Node
+class_name HealthComponent
+
+signal defeat()
+signal health_changed()
+
+@export var body: PhysicsBody3D
+
+var max_health: int
+var current_health: int:
+  set(value):
+    current_health = max(value, 0.0)
+    if current_health == 0.0:
+      defeat.emit()
+    health_changed.emit()
+
+func update_max_health(max_hp_in: float) -> void:
+  max_health = max_hp_in
+  current_health = max_health
+  printt("health changed", max_health, current_health)
+  
+func take_damage(damage_in: float, is_critical: bool) -> void:
+  var damage = damage_in
+  
+  if is_critical:
+    damage *= 2.0
+    VfxManager.spawn_damage_number(damage, Color.YELLOW, body.global_position)
+  else:
+    VfxManager.spawn_damage_number(damage, Color.WHITE_SMOKE, body.global_position)
+  current_health -= damage
+
+func get_health_string() -> String:
+  return "%s/%s" % [current_health, max_health]

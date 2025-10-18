@@ -1,7 +1,8 @@
 extends CharacterBody3D
+class_name Player
 
-const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+const DECAY := 10.0
 
 # Stores the x/y direction the player is trying to look in
 var _look := Vector2.ZERO
@@ -9,20 +10,34 @@ var _look := Vector2.ZERO
 # Stores the direction the player moves when attacking
 var _attack_direction := Vector3.ZERO
 
+@export_category("Player Control")
 @export var animation_decay: float = 20.0
 @export var mouse_sensitivity: float = 0.002
 @export var min_boundary: float = -50.0
 @export var max_boundary: float = 30.0
 @export var attack_move_speed: float = 3.0
+@export_category("RPG Stats")
+@export var stats: CharacterStats
 
+@onready var health_component: HealthComponent = $HealthComponent
+@onready var attack_cast: RayCast3D = %AttackCast
 @onready var rig_pivot: Node3D = $RigPivot
 @onready var horizontal_pivot: Node3D = $HorizontalPivot
 @onready var vertical_pivot: Node3D = $HorizontalPivot/VerticalPivot
 @onready var rig: Node3D = $RigPivot/Rig
+@onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
+@onready var area_attack: ShapeCast3D = $RigPivot/AreaAttack
+@onready var user_interface: Control = $UserInterface
 
 
 func _ready() -> void:
   Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+  health_component.update_max_health(stats.get_max_hp())
+  stats.level_up_notification.connect(
+    func(): health_component.update_max_health(stats.get_max_hp())
+  )
+  stats.update_stats.connect(user_interface.update_stats_display)
+  user_interface.update_stats_display()
 
 
 func _physics_process(delta: float) -> void:
@@ -36,9 +51,10 @@ func _physics_process(delta: float) -> void:
 
   var direction := get_movement_direction()
   rig.update_animation_tree(direction)
-  
+
   handle_idle_physics_frame(direction, delta)
   handle_slashing_physics_frame(delta)
+  handle_overhead_physics_frame()
   move_and_slide()
 
   if not is_on_floor():
@@ -51,9 +67,14 @@ func _unhandled_input(event: InputEvent) -> void:
   if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
     if event is InputEventMouseMotion:
       _look = -event.relative * mouse_sensitivity
+  if event.is_action_pressed(&"debug_gain_xp"):
+    stats.xp += 10000
   if rig.is_idle():
     if event.is_action_pressed("click"):
-      slash_attack()
+      slash_attack() 
+    if event.is_action_pressed("right_click"):
+      rig.travel("Overhead") 
+    
 
 
 func get_movement_direction() -> Vector3:
@@ -67,10 +88,8 @@ func frame_camera_rotation() -> void:
   vertical_pivot.rotate_x(_look.y)
 
   vertical_pivot.rotation.x = clampf(
-    vertical_pivot.rotation.x,
-    deg_to_rad(min_boundary),
-    deg_to_rad(max_boundary)
-    )
+    vertical_pivot.rotation.x, deg_to_rad(min_boundary), deg_to_rad(max_boundary)
+  )
 
   _look = Vector2.ZERO
 
@@ -89,23 +108,52 @@ func slash_attack() -> void:
   _attack_direction = get_movement_direction()
   if _attack_direction.is_zero_approx():
     _attack_direction = rig.global_basis * Vector3(0, 0, 1)
+  attack_cast.clear_exceptions()
 
 
 func handle_slashing_physics_frame(delta: float) -> void:
   if not rig.is_slashing():
     return
+
   velocity.x = _attack_direction.x * attack_move_speed
   velocity.z = _attack_direction.z * attack_move_speed
   look_toward_direction(_attack_direction, delta)
+  attack_cast.deal_damage(10.0 + stats.get_damage_modifier(), stats.get_crit_chance())
 
+func handle_overhead_physics_frame() -> void:
+  if not rig.is_overhead():
+    return
+  velocity.x = 0.0
+  velocity.z = 0.0
 
 func handle_idle_physics_frame(direction: Vector3, delta: float) -> void:
-  if not rig.is_idle():
+  if not rig.is_idle() and not rig.is_dashing():
     return
+  velocity.x = exponential_decay(
+    velocity.x, 
+    direction.x * stats.get_base_speed(),
+    DECAY,
+    delta
+    )
+    
+  velocity.z = exponential_decay(
+    velocity.z, 
+    direction.z * stats.get_base_speed(),
+    DECAY,
+    delta
+    )
   if direction:
-    velocity.x = direction.x * SPEED
-    velocity.z = direction.z * SPEED
     look_toward_direction(direction, delta)
-  else:
-    velocity.x = move_toward(velocity.x, 0, SPEED)
-    velocity.z = move_toward(velocity.z, 0, SPEED)
+
+
+func _on_health_component_defeat() -> void:
+  rig.travel("Defeat")
+  collision_shape_3d.disabled = true
+  set_physics_process(false)
+
+
+func _on_rig_heavy_attack() -> void:
+  area_attack.deal_damage(10.0 + stats.get_damage_modifier(), stats.get_crit_chance())
+
+func exponential_decay(a: float, b: float, decay: float, delta: float) -> float:
+  return b + (a - b) * exp(-decay * delta)
